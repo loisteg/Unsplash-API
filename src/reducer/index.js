@@ -1,7 +1,14 @@
-const reducer = (state = [], action) => {
+const initialState = {
+  images: [],
+  clickedImage: "",
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "IMAGES_FETCHED":
-      return [...state, ...action.payload];
+      return { ...state, images: [...action.payload] };
+    case "CLICKED_IMAGE":
+      return { ...state, clickedImage: action.payload };
     default:
       return state;
   }

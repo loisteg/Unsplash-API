@@ -8,7 +8,11 @@ import { imagesFetching } from "../actions";
 const SetContent = ({ Component, dataType }) => {
   const { id } = useParams();
 
-  const data = useSelector((state) => state);
+  const images = useSelector((state) => state.images);
+  const clickedImageNow = useSelector((state) => state.clickedImage);
+  const clickedImage = localStorage.getItem("clickedImage")
+    ? localStorage.getItem("clickedImage")
+    : clickedImageNow;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,10 +23,13 @@ const SetContent = ({ Component, dataType }) => {
 
   switch (dataType) {
     case "list":
-      return <Component list={data} />;
+      return <Component list={images} />;
     case "image":
-      const [image] = data.filter((image) => image.id === id);
-      return <Component image={image} />;
+      if (!clickedImage) {
+        const [image] = images.filter((image) => image.id === id);
+        return <Component src={image.src_full} />;
+      }
+      return <Component src={clickedImage} />;
   }
 };
 

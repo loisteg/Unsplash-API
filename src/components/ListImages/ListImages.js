@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
+import { clickedImage } from "../../actions";
+import { useDispatch } from "react-redux";
 
 import "./ListImages.scss";
 
 const ListImages = ({ list }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="container">
       {list.map((image) => {
         return (
-          <Link to={`/${image.id}`} className="card" key={image.id}>
+          <Link
+            to={`/${image.id}`}
+            className="card"
+            key={image.id}
+            onClick={() => dispatch(clickedImage(image.src_full))}
+          >
             <div
               className="card-img"
               style={{
