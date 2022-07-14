@@ -9,7 +9,11 @@ const imagesFetched = (data) => ({
   payload: data,
 });
 
-export const clickedImage = (data) => {
+export const handlerClick = (data) => (dispatch) => {
   localStorage.setItem("clickedImage", data);
+  dispatch(clickedImage(data));
+};
+
+const clickedImage = (data) => {
   return { type: "CLICKED_IMAGE", payload: data };
 };

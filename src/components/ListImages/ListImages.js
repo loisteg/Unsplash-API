@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { clickedImage } from "../../actions";
+import { handlerClick } from "../../actions";
 import { useDispatch } from "react-redux";
 
 import "./ListImages.scss";
@@ -15,7 +15,7 @@ const ListImages = ({ list }) => {
             to={`/${image.id}`}
             className="card"
             key={image.id}
-            onClick={() => dispatch(clickedImage(image.src_full))}
+            onClick={() => dispatch(handlerClick(image.src_full))}
           >
             <div
               className="card-img"
